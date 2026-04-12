@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.stockanalyzer.ingestion.service;
 
-import com.example.demo.model.StockResponse;
+import com.stockanalyzer.ingestion.model.StockResponse;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.stockanalyzer.ingestion.model;
 
 import lombok.Data;
 
