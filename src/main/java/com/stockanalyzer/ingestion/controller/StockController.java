@@ -16,7 +16,7 @@ public class StockController {
     private StockService stockService;
 
     @GetMapping("/analyze")
-    public StockResponse analyze(@RequestParam String stock) {
-        return stockService.analyze(stock);
+    public String analyze(@RequestParam String stock) {
+        return stockService.getStock(stock);
     }
 }

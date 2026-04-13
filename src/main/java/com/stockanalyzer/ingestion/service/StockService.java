@@ -1,17 +1,19 @@
 package com.stockanalyzer.ingestion.service;
 
+import com.stockanalyzer.ingestion.client.StockApiClient;
 import com.stockanalyzer.ingestion.model.StockResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StockService {
 
-    public StockResponse analyze(String stock) {
-        StockResponse response = new StockResponse();
-        response.setStock(stock);
-        response.setPrice(2450);
-        response.setSentiment("NEUTRAL");
-        response.setRecommendation("HOLD");
-        return response;
+    private final StockApiClient client;
+
+    public StockService(StockApiClient client) {
+        this.client = client;
+    }
+
+    public String getStock(String symbol) {
+        return client.fetchStock(symbol);
     }
 }
