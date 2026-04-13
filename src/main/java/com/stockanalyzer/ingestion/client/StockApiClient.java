@@ -1,5 +1,6 @@
 package com.stockanalyzer.ingestion.client;
 
+import com.stockanalyzer.ingestion.dto.AlphaVantageResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -14,7 +15,7 @@ public class StockApiClient {
                 .build();
     }
 
-    public String fetchStock(String symbol) {
+    public AlphaVantageResponse fetchStock(String symbol) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/query")
@@ -23,7 +24,7 @@ public class StockApiClient {
                         .queryParam("apikey", "YOUR_API_KEY")
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(AlphaVantageResponse.class)
                 .block();
     }
 }
