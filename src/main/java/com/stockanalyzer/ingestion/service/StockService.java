@@ -28,7 +28,7 @@ public class StockService {
                 Double.parseDouble(quote.getChange()),
                 quote.getChangePercent()
         );
-        producer.sendStock(stock.toString());
+        producer.sendStock(stock);
 
         return stock;
     }

@@ -1,5 +1,11 @@
 package com.stockanalyzer.ingestion.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor   // ✅ REQUIRED for Jackson
 public class StockResponse {
 
     private String symbol;
