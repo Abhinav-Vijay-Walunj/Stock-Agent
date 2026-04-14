@@ -2,6 +2,7 @@ package com.stockanalyzer.ingestion.service;
 
 import com.stockanalyzer.ingestion.client.StockApiClient;
 import com.stockanalyzer.ingestion.dto.AlphaVantageResponse;
+import com.stockanalyzer.ingestion.kafka.StockProducer;
 import com.stockanalyzer.ingestion.model.StockResponse;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 public class StockService {
 
     private final StockApiClient client;
+    private final StockProducer producer;
 
-    public StockService(StockApiClient client) {
+    public StockService(StockApiClient client, StockProducer producer) {
         this.client = client;
+        this.producer = producer;
     }
 
     public StockResponse getStock(String symbol) {
@@ -19,11 +22,14 @@ public class StockService {
 
         AlphaVantageResponse.GlobalQuote quote = response.getGlobalQuote();
 
-        return new StockResponse(
+        StockResponse stock = new StockResponse(
                 quote.getSymbol(),
                 Double.parseDouble(quote.getPrice()),
                 Double.parseDouble(quote.getChange()),
                 quote.getChangePercent()
         );
+        producer.sendStock(stock.toString());
+
+        return stock;
     }
 }
